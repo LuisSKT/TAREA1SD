@@ -5,20 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class miConexion {
-    private static final String URL = "jdbc:mysql://localhost:3306/mibase1?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:postgresql://localhost:5432/mibase1";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "1234";
 
     public Connection getConnection() {
         Connection conn = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
+
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
             if (conn != null) {
-                System.out.println("✓ Conexión a MySQL establecida correctamente");
+                System.out.println("✓ Conexión a PostgreSQL establecida correctamente");
             }
         } catch (ClassNotFoundException e) {
-            System.err.println("✗ Driver MySQL no encontrado: " + e.getMessage());
+            System.err.println("✗ Driver PostgreSQL no encontrado: " + e.getMessage());
         } catch (SQLException e) {
             System.err.println("✗ Error de conexión: " + e.getMessage());
         }
